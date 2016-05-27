@@ -1,0 +1,8 @@
+
+[MESSAGES CONTROL]
+# disabled messages
+disable=invalid-name
+
+[FORMAT]
+# Maximum number of characters on a single line.
+max-line-length=140
