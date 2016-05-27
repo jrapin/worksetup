@@ -1,0 +1,18 @@
+# Virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+# export PATH=$PATH:~/Applications/node-v0.12.4-linux-x64/bin
+# export PATH=$PATH:~/Applications/arcanist/bin
+
+# aliases
+alias nose='docker-compose run cardiolib nosetests -v --rednose'
+alias spyder='/usr/local/bin/spyder'
+
+# Autojump
+. /usr/share/autojump/autojump.sh
+alias protege='screen -d -m -S protege bash -c /home/jeremy/Applications/Protege_4.3/run.sh'
+
+
