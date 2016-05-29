@@ -186,6 +186,8 @@ hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
 " CtrlP for opening files easily
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 " use ctrl+t to open in a new tab
 
 
