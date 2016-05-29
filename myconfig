@@ -45,10 +45,11 @@ function ipyvim {
 }
 
 function vv {
-  if tmux has-session -t $1 2>/dev/null; then
-    tmux attach -t $1
+  name="_virtual_vim_$1"
+  if tmux has-session -t $name 2>/dev/null; then
+    tmux attach -t $name
   else
-    ipyvim $1 $1
+    ipyvim $name $1
   fi
 }
 
