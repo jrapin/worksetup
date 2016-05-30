@@ -21,6 +21,7 @@ Bundle 'jpalardy/vim-slime'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'terryma/vim-smooth-scroll'
+Plugin 'rbong/vim-vertical'
 " Make sure to call :PluginInstall in vim after changing the list
 
 
@@ -83,8 +84,10 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Utilisation des canards pour changer d'onglets
-nnoremap > gt
-nnoremap < gT
+nnoremap L gt
+nnoremap H gT
+" nnoremap > gt
+" nnoremap < gT
 
 
 au BufNewFile,BufRead *.py
@@ -186,6 +189,7 @@ hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
 " CtrlP for opening files easily
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
 " let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 " use ctrl+t to open in a new tab
@@ -196,5 +200,20 @@ noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+
+" ZSH like menu
+" When you type the first tab, it will complete as much as possible, the second
+" tab hit will provide a list, the third and subsequent tabs will cycle through
+" completion options so you can complete the file without further keys
+set wildmode=longest,list,full
+" Sweet zsh-like autocompletion menu
+set wildmenu
+
+" vertically look for non-empty character
+" map <leader>j :Vertical f<CR>
+" map <leader>k :Vertical b<CR>
+noremap <silent> <c-j> :Vertical f<CR>
+noremap <silent> <c-k> :Vertical b<CR>
 
 
