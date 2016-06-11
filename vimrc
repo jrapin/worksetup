@@ -21,6 +21,7 @@ Bundle 'jpalardy/vim-slime'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'terryma/vim-smooth-scroll'
+Bundle 'tpope/vim-surround'
 Plugin 'rbong/vim-vertical'
 " Make sure to call :PluginInstall in vim after changing the list
 
@@ -83,7 +84,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Utilisation des canards pour changer d'onglets
+
+" shortcut for changing tab
 nnoremap L gt
 nnoremap H gT
 " nnoremap > gt
@@ -103,6 +105,7 @@ au BufNewFile,BufRead *.py
 " syntastic
 set laststatus=2
 let g:syntastic_python_checkers = ['pylint']
+" make sure pylint is installed in the virtualenv you use!
 
 
 " configuration for nerdtree
@@ -178,7 +181,7 @@ command IPyRestart silent execute "!byobu-tmux send-keys -t right 'exit' enter C
 map <F12> :IPyRestart<CR>
 
 
-" solarize 
+" solarize (color pattern)
 let g:solarized_termtrans = 1
 colorscheme solarized 
 syntax enable
@@ -203,9 +206,10 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 
 " ZSH like menu
-" When you type the first tab, it will complete as much as possible, the second
-" tab hit will provide a list, the third and subsequent tabs will cycle through
-" completion options so you can complete the file without further keys
+" When you type the first tab, it will complete as much as possible,
+" the second tab hit will provide a list, the third
+" and subsequent tabs will cycle through completion options
+" so you can complete the file without further keys
 set wildmode=longest,list,full
 " Sweet zsh-like autocompletion menu
 set wildmenu
