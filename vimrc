@@ -22,6 +22,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'tpope/vim-surround'
+Bundle 'easymotion/vim-easymotion'
+Bundle 'tpope/vim-fugitive'
 Plugin 'rbong/vim-vertical'
 " Make sure to call :PluginInstall in vim after changing the list
 
