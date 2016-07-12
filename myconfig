@@ -40,6 +40,7 @@ function ipyvim {
       byobu-tmux send-keys -t $1.right $virtualenv_instruction enter C-l
     fi
     byobu-tmux send-keys -t $1.right 'ipython' enter C-l
+    byobu-tmux send-keys -t $1.left 'vim' enter
     byobu-tmux resize-pane -t $1 -R 15
     byobu-tmux attach -t $1
   fi
