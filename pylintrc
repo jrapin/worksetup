@@ -1,5 +1,4 @@
 [MASTER]
-init-hook='sys.path = ["/home/jeremy/workspace/cardiolib/", "/home/jeremy/workspace/Taboulet/taboulet/"])'
 extension-pkg-whitelist=numpy,nose,nose.tools,numpy.testing
 
 [MESSAGES CONTROL]

@@ -180,7 +180,7 @@ let g:slimux_select_from_current_window = 1
 " for restarting ipython on left panel:
 " (silent execution requires redrawing afterwards)
 command IPyRestart silent execute "!byobu-tmux send-keys -t right 'exit' enter C-l && byobu-tmux send-keys -t right 'ipython' enter C-l" | execute ':redraw!'
-map <F12> :IPyRestart<CR>
+map <F10> :IPyRestart<CR>
 
 
 " solarize (color pattern)
@@ -222,4 +222,6 @@ set wildmenu
 noremap <silent> <c-j> :Vertical f<CR>
 noremap <silent> <c-k> :Vertical b<CR>
 
+" set paste mode
+set pastetoggle=<F12>
 
