@@ -31,6 +31,8 @@ Plugin 'rbong/vim-vertical'
 " For YouCompleteMe, you must install afterwards:
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer
+" or on ubuntu 16:
+" python3 ./install.py --clang-completer
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
@@ -127,13 +129,13 @@ set clipboard=unnamed
 
 
 "python with virtualenv support
-py << EOF
+py3 << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
   project_base_dir = os.environ['VIRTUAL_ENV']
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
+  exec(open(activate_this).read(), dict(__file__=activate_this))
 EOF
 
 
@@ -163,6 +165,7 @@ let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1 }
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " do not forget to have leader defined
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
 
 
 
