@@ -22,8 +22,7 @@ function ipyvim {
   # $1 session name
   # $2 virtualenv name (default to current virtualenv)
   if tmux has-session -t $1 2>/dev/null; then
-    echo "Cannot create session $1 since it already exists."
-    return 1
+    tmux attach -t $1
   else
     window_virtualenv=$2
     if [ "$2" = "" ]; then
@@ -46,6 +45,11 @@ function ipyvim {
     byobu-tmux attach -t $1
   fi
 }
+
+
+alias ipv="ipyvim"
+# define autocompletion
+compdef __tmux-sessions ipyvim
 
 function vv {
   name="_virtual_vim_$1"
