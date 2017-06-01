@@ -45,6 +45,18 @@ filetype plugin indent on    " requiredenable syntax highlighting
 
 "Standard configuration
 
+
+" escaping
+" using using jk 
+inoremap jk <esc>
+inoremap kj <esc>
+" or tab
+nnoremap <Tab> <Esc>
+vnoremap <Tab> <Esc>gV
+onoremap <Tab> <Esc>
+inoremap <Tab> <Esc>`^
+inoremap <Leader><Tab> <Tab>
+
 syntax enable
 
 :let mapleader=" "
@@ -173,6 +185,8 @@ let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:slime_python_ipython = 1
 let g:slime_target = "tmux"
 let g:slimux_select_from_current_window = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": ":.1"}
+let g:slime_dont_ask_default = 1
 " use with tmux! or byobu
 " select second pane of current window with 0.1
 " useful commands:
@@ -228,3 +242,65 @@ noremap <silent> <c-k> :Vertical b<CR>
 " set paste mode
 set pastetoggle=<F12>
 
+" caps lock as esc
+au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+
+" go to end of copy after copying
+vnoremap y y']
+vnoremap Y y
+
+" Colorize line numbers in insert and visual modes
+" ------------------------------------------------
+function! SetCursorLineNrColorInsert(mode)
+    " Insert mode: white
+    if a:mode == "i"
+        highlight CursorLineNr ctermfg=9 
+        highlight LineNr ctermfg=9
+    " Replace mode: red
+    elseif a:mode == "r"
+        highlight CursorLineNr ctermfg=1
+        highlight LineNr ctermfg=1
+    endif
+endfunction
+
+function! SetCursorLineNrColorVisual()
+    set updatetime=0
+    " Visual mode: green
+    highlight CursorLineNr cterm=none ctermfg=2
+    highlight LineNr cterm=none ctermfg=2
+endfunction
+
+function! SetCursorLineNrColorReplace()
+    set updatetime=0
+    " Replace mode: red
+    highlight CursorLineNr cterm=none ctermfg=1
+    highlight LineNr cterm=none ctermfg=1
+endfunction
+
+function! SetCursorLineNrColorScript()
+    set updatetime=0
+    " script mode: blue
+    highlight CursorLineNr cterm=none ctermfg=4
+    highlight LineNr cterm=none ctermfg=4
+endfunction
+
+function! ResetCursorLineNrColor()
+    set updatetime=4000
+    highlight CursorLineNr cterm=none ctermfg=3
+    highlight LineNr cterm=none ctermfg=3
+endfunction
+
+
+nnoremap <silent> v :call SetCursorLineNrColorVisual()<CR>v
+nnoremap <silent> V :call SetCursorLineNrColorVisual()<CR>V
+nnoremap <silent> <C-v> :call SetCursorLineNrColorVisual()<CR><C-v>
+nnoremap <silent> g :call SetCursorLineNrColorReplace()<CR>r
+nnoremap , :call SetCursorLineNrColorScript()<CR>:
+nnoremap / :call SetCursorLineNrColorScript()<CR>/
+
+augroup CursorLineNrColorSwap
+    autocmd!
+    autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
+    autocmd InsertLeave * call ResetCursorLineNrColor()
+    autocmd CursorHold * call ResetCursorLineNrColor()
+augroup END
