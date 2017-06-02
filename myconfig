@@ -10,7 +10,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # export PATH=$PATH:~/Applications/arcanist/bin
 
 # aliases
-alias nose='docker-compose run cardiolib nosetests -v --rednose'
+alias nose='docker-compose run cardiolib-35 nosetests -v --rednose'
 alias spyder='/usr/local/bin/spyder'
 
 # Autojump

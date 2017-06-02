@@ -223,6 +223,9 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
+" easymotion
+map <Leader> <Plug>(easymotion-prefix)
+
 
 " ZSH like menu
 " When you type the first tab, it will complete as much as possible,
@@ -242,8 +245,6 @@ noremap <silent> <c-k> :Vertical b<CR>
 " set paste mode
 set pastetoggle=<F12>
 
-" caps lock as esc
-au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 " go to end of copy after copying
 vnoremap y y']
@@ -289,14 +290,6 @@ function! ResetCursorLineNrColor()
     highlight CursorLineNr cterm=none ctermfg=3
     highlight LineNr cterm=none ctermfg=3
 endfunction
-
-
-nnoremap <silent> v :call SetCursorLineNrColorVisual()<CR>v
-nnoremap <silent> V :call SetCursorLineNrColorVisual()<CR>V
-nnoremap <silent> <C-v> :call SetCursorLineNrColorVisual()<CR><C-v>
-nnoremap <silent> g :call SetCursorLineNrColorReplace()<CR>r
-nnoremap , :call SetCursorLineNrColorScript()<CR>:
-nnoremap / :call SetCursorLineNrColorScript()<CR>/
 
 augroup CursorLineNrColorSwap
     autocmd!
