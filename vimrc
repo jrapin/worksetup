@@ -50,12 +50,6 @@ filetype plugin indent on    " requiredenable syntax highlighting
 " using using jk 
 inoremap jk <esc>
 inoremap kj <esc>
-" or tab
-nnoremap <Tab> <Esc>
-vnoremap <Tab> <Esc>gV
-onoremap <Tab> <Esc>
-inoremap <Tab> <Esc>`^
-inoremap <Leader><Tab> <Tab>
 
 syntax enable
 
