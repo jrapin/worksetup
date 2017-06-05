@@ -5,17 +5,16 @@ source /usr/local/bin/virtualenvwrapper.sh
 export PATH=/usr/local/cuda/bin:$PATH
 export PATH=~/Applications/Arcanist/arcanist/bin:$PATH
 # export PATH=/home/jeremy/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # export PATH=$PATH:~/Applications/node-v0.12.4-linux-x64/bin
 # export PATH=$PATH:~/Applications/arcanist/bin
 
 # aliases
 alias nose='docker-compose run cardiolib-35 nosetests -v --rednose'
 alias spyder='/usr/local/bin/spyder'
+alias protege='screen -d -m -S protege bash -c /home/jeremy/Applications/Protege/run.sh'
 
 # Autojump
 . /usr/share/autojump/autojump.sh
-alias protege='screen -d -m -S protege bash -c /home/jeremy/Applications/Protege/run.sh'
 
 # create a byobu session with ipython on the right, and keeping the virtualenv or specifying it
 function ipyvim {
@@ -48,15 +47,14 @@ function ipyvim {
 
 
 alias ipv="ipyvim"
-# define autocompletion
-compdef __tmux-sessions ipyvim
 
-function vv {
-  name="_virtual_vim_$1"
-  if tmux has-session -t $name 2>/dev/null; then
-    tmux attach -t $name
-  else
-    ipyvim $name $1
-  fi
+# define autocompletion
+# source: https://coderwall.com/p/ht-ica/tmux-named-sessions-with-autocomplete
+function __tmux-sessions() {
+    local expl
+    local -a sessions
+    sessions=( ${${(f)"$(command tmux list-sessions)"}/:[ $'\t']##/:} )
+    _describe -t sessions 'sessions' sessions "$@"
 }
 
+compdef __tmux-sessions ipyvim
