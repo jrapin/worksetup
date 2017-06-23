@@ -82,6 +82,9 @@ set showmatch
 " Ignore case for seaches
 " set ignorecase
 
+" Incremental search
+set incsearch
+
 
 set expandtab
 set tabstop=4
