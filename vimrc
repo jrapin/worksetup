@@ -34,6 +34,8 @@ Plugin 'rbong/vim-vertical'
 " or on ubuntu 16:
 " python3 ./install.py --clang-completer
 
+" For syntastic, install pylint in your system
+
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
 
@@ -117,7 +119,7 @@ au BufNewFile,BufRead *.py
 
 " syntastic
 set laststatus=2
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['flake8']
 " make sure pylint is installed in the virtualenv you use!
 
 
