@@ -5,6 +5,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 export UNRAR_LIB_PATH=/usr/lib/libunrar.so
 export PATH=/usr/local/cuda/bin:$PATH
 export PATH=~/Applications/Arcanist/arcanist/bin:$PATH
+export PATH=~/Applications/Arcanist/arcanist/bin:$PATH
+export UNRAR_LIB_PATH=/usr/lib/libunrar.so
 # export PATH=/home/jeremy/bin:$PATH
 # export PATH=$PATH:~/Applications/node-v0.12.4-linux-x64/bin
 # export PATH=$PATH:~/Applications/arcanist/bin
