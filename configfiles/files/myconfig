@@ -20,6 +20,9 @@ alias protege='screen -d -m -S protege bash -c /home/jeremy/Applications/Protege
 # Autojump
 . /usr/share/autojump/autojump.sh
 
+# Solve window naming issue with zsh and byobu
+export DISABLE_AUTO_TITLE="true"
+
 # create a byobu session with ipython on the right, and keeping the virtualenv or specifying it
 function ipyvim {
   # $1 session name
