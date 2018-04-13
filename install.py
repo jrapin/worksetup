@@ -1,32 +1,33 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
-import shutil
+from pathlib import Path
 
 
 def symlink_to_home(files_directory, backup_directory):
-    files_directory = os.path.abspath(files_directory)
-    for basename in os.listdir(files_directory):
-        filepath = os.path.join(files_directory, basename)
-        homefilepath = os.path.expanduser(os.path.join("~", "." + basename))
+    files_directory = Path(files_directory).absolute()
+    for subpath in files_directory.iterdir():
+        filepath = files_directory / subpath.name
+        homefilepath = Path.home() / ("." + subpath.name)
         # create backup if already exists as real file
-        if os.path.isfile(homefilepath) and not os.path.islink(homefilepath):
-            if not os.path.exists(backup_directory):
-                os.mkdir(backup_directory)
-            backupfilepath = os.path.join(backup_directory, basename)
-            if os.path.exists(backupfilepath):
-                os.remove(backupfilepath)
-            shutil.move(homefilepath, backupfilepath)
+        if homefilepath.is_file() and not homefilepath.is_symlink():
+            backup_directory.mkdir(exist_ok=True)
+            backupfilepath = backup_directory / subpath.name
+            if backupfilepath.exists():
+                #os.remove(str(backupfilepath))
+                backupfilepath.unlink()
+            shutil.move(str(homefilepath), str(backupfilepath))
         # create symlink
-        if os.path.exists(homefilepath) or os.path.islink(homefilepath):  # deal with broken links
-            os.remove(homefilepath)
-        os.symlink(filepath, homefilepath)
+        if homefilepath.exists() or homefilepath.is_symlink():  # deal with broken links
+            #os.remove(homefilepath)
+            homefilepath.unlink()
+        homefilepath.symlink_to(filepath)
 
 
 if __name__ == "__main__":
-    dirname = os.path.dirname(__file__)
-    filedir = os.path.join(dirname, "files")
-    backupdir = os.path.join(dirname, "backup")
+    dirname = Path(__file__).parent
+    filedir = dirname / "files"
+    backupdir = dirname / "backup"
     symlink_to_home(filedir, backupdir)
 
