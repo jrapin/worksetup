@@ -2,9 +2,7 @@
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
-# aliases
-alias nose='docker-compose run cardiolib-35 nosetests -v --rednose'
-alias spyder='/usr/local/bin/spyder'
+# alias for running Protege (ontologies) in a screen
 alias protege='screen -d -m -S protege bash -c /home/jeremy/Applications/Protege/run.sh'
 
 # Autojump

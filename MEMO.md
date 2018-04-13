@@ -8,7 +8,7 @@ This memo provides useful commandlines and configurations for Ubuntu.
 The following provides standard application such as:
  - vim: for editing text files
  - git: for versioning
- - byobu: for a terminal multiplexer
+ - screen/byobu: for terminal multiplexer
  - vlc: for playing movies
  - python3: for programming
 
@@ -17,6 +17,7 @@ sudo apt-get update && sudo apt-get install -y \
   build-essential \
   vim-gnome \
   git \
+  screen \
   byobu \
   vlc \
   python3 \
@@ -99,5 +100,3 @@ sudo apt-get install -y \
 ```
 
 FYI, language dictionaries can be downloaded through the language support in system parameters.
-
-
