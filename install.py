@@ -15,9 +15,11 @@ def symlink_to_home(files_directory, backup_directory):
             if not os.path.exists(backup_directory):
                 os.mkdir(backup_directory)
             backupfilepath = os.path.join(backup_directory, basename)
+            if os.path.exists(backupfilepath):
+                os.remove(backupfilepath)
             shutil.move(homefilepath, backupfilepath)
         # create symlink
-        if os.path.exists(homefilepath):
+        if os.path.exists(homefilepath) or os.path.islink(homefilepath):  # deal with broken links
             os.remove(homefilepath)
         os.symlink(filepath, homefilepath)
 
