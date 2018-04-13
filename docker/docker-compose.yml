@@ -1,0 +1,9 @@
+version: "3"
+services:
+  workimage:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ..:/worksetup
+    shm_size: 500M
