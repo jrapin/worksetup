@@ -7,3 +7,19 @@ services:
     volumes:
       - ..:/worksetup
     shm_size: 500M
+  gui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ..:/worksetup
+      - "/etc/group:/etc/group:ro"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/shadow:/etc/shadow:ro"
+      - "/etc/sudoers.d:/etc/sudoers.d:ro"
+      - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+    environment:
+      - DISPLAY
+    # user for displays. This requires running "export UID" beforehand.
+    user: $UID
+    shm_size: 500M

@@ -7,14 +7,17 @@ RUN apt-get update && apt-get install -y \
   byobu \
   python3 \
   python3-dev \
-  python3-pip
+  python3-pip \
+  python3-tk
 
 RUN rm -f /usr/bin/pip && ln -s /usr/bin/pip3 /usr/bin/pip && pip install -U pip
 RUN ln -s /usr/bin/python3 /usr/bin/python
+COPY docker/requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
 
 ADD . /worksetup
 WORKDIR /worksetup
-RUN pip install -r docker/requirements.txt
+
 
 
 
