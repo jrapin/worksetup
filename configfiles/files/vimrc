@@ -13,10 +13,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Bundle 'SirVer/ultisnips'
+"Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'  
+Bundle 'davidhalter/jedi-vim'
 Bundle 'jpalardy/vim-slime'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ctrlpvim/ctrlp.vim'
@@ -25,11 +26,15 @@ Bundle 'tpope/vim-surround'
 Bundle 'easymotion/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Plugin 'rbong/vim-vertical'
+Plugin 'AndrewRadev/linediff.vim'
+Plugin 'Vimjas/vim-python-pep8-indent'
 " Make sure to call :PluginInstall in vim after changing the list
 
-
+" YCM or Jedi-vim are similar, one is probably sufficient
 " For YouCompleteMe, you must install afterwards:
 " cd ~/.vim/bundle/YouCompleteMe
+" git pull
+" git submodule update --init --recursive
 " ./install.py --clang-completer
 " or on ubuntu 16:
 " python3 ./install.py --clang-completer
@@ -137,20 +142,8 @@ set clipboard=unnamed
 
 
 
-
-
-"python with virtualenv support
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  exec(open(activate_this).read(), dict(__file__=activate_this))
-EOF
-
-
-
+" C-n for completion
+let g:jedi#use_tabs_not_buffers = 1
 
 " Make UltiSnips compatible with YouCompleteMe
 function! g:UltiSnips_Complete()
@@ -176,7 +169,7 @@ let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1 }
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " do not forget to have leader defined
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
+" let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 
 
@@ -195,7 +188,7 @@ let g:slime_dont_ask_default = 1
 
 " for restarting ipython on left panel:
 " (silent execution requires redrawing afterwards)
-command IPyRestart silent execute "!byobu-tmux send-keys -t right 'exit' enter C-l && byobu-tmux send-keys -t right 'ipython' enter C-l" | execute ':redraw!'
+command IPyRestart silent execute "!byobu-tmux send-keys -t right 'ipython' enter C-l && byobu-tmux send-keys -t right 'exit' enter C-l enter C-l && byobu-tmux send-keys -t right 'ipython' enter C-l" | execute ':redraw!'
 map <F10> :IPyRestart<CR>
 
 
@@ -205,7 +198,13 @@ colorscheme solarized
 syntax enable
 set background=dark
 hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
+hi PmenuSel ctermfg=DarkGrey guifg=#2b506e guibg=#000000
+hi TabLineSel ctermfg=Red ctermbg=DarkGrey
 
+"Pmenu – normal item
+"PmenuSel – selected item
+"PmenuSbar – scrollbar
+"PmenuThumb – thumb of the scrollbar
 
 " CtrlP for opening files easily
 let g:ctrlp_map = '<c-p>'
@@ -296,3 +295,6 @@ augroup CursorLineNrColorSwap
     autocmd InsertLeave * call ResetCursorLineNrColor()
     autocmd CursorHold * call ResetCursorLineNrColor()
 augroup END
+
+"today
+inoremap <expr> dts strftime("%Y-%m-%d (%a)")

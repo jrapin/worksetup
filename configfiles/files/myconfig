@@ -1,12 +1,8 @@
-# Virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
 # alias for running Protege (ontologies) in a screen
 alias protege='screen -d -m -S protege bash -c /home/jeremy/Applications/Protege/run.sh'
 
 # Autojump
-. /usr/share/autojump/autojump.sh
+#. /usr/share/autojump/autojump.sh
 
 # Solve window naming issue with zsh and byobu
 export DISABLE_AUTO_TITLE="true"
