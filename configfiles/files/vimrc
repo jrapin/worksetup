@@ -15,8 +15,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 "Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
-Bundle 'scrooloose/syntastic'
-"Bundle 'Valloric/YouCompleteMe'  
+Bundle 'w0rp/ale'
+"Bundle 'scrooloose/syntastic'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'jpalardy/vim-slime'
 Bundle 'altercation/vim-colors-solarized'
@@ -122,10 +123,22 @@ au BufNewFile,BufRead *.py
     \ set nowrap |
 
 
-" syntastic
-set laststatus=2
-let g:syntastic_python_checkers = ['flake8']
 " make sure pylint is installed in the virtualenv you use!
+" syntastic
+"set laststatus = 2
+"let g: syntastic_python_checkers = ['flake8']
+" make sure pylint is installed in the virtualenv you use!
+
+
+" Check Python files with flake8 and pylint.
+let g:ale_linters = {'python': ['mypy', 'flake8', 'pylint']}
+" Fix Python files with autopep8, could add yapf, black
+let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'autopep8']}
+" Disable warnings about trailing whitespace for Python files.
+let b:ale_warn_about_trailing_whitespace=0
+let g:ale_python_mypy_options='--strict --ignore-missing-imports'
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save=1
 
 
 " configuration for nerdtree
