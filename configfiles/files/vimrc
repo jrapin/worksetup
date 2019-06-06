@@ -1,6 +1,10 @@
 set nocompatible              " required
 filetype off                  " required
 
+
+" You should install the following packages for everything to work:
+" pip install autopep8 pylint flake8 mypy
+
 " for installing vundle:
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " set the runtime path to include Vundle and initialize
@@ -13,11 +17,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-"Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'w0rp/ale'
-"Bundle 'scrooloose/syntastic'
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'python/black'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'jpalardy/vim-slime'
 Bundle 'altercation/vim-colors-solarized'
@@ -40,10 +42,12 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 " or on ubuntu 16:
 " python3 ./install.py --clang-completer
 
-" For syntastic, install pylint in your system
-
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
+" not used anymore:
+"Bundle 'scrooloose/syntastic'
+"Bundle 'SirVer/ultisnips'
+"Bundle 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 
@@ -53,6 +57,7 @@ filetype plugin indent on    " requiredenable syntax highlighting
 
 "Standard configuration
 
+set nomodeline  " this is to prevent arbitrary code execution security breach
 
 " escaping
 " using using jk 
@@ -129,16 +134,24 @@ au BufNewFile,BufRead *.py
 "let g: syntastic_python_checkers = ['flake8']
 " make sure pylint is installed in the virtualenv you use!
 
+let g:black_linelength = 140
 
 " Check Python files with flake8 and pylint.
-let g:ale_linters = {'python': ['mypy', 'flake8', 'pylint']}
+let g:ale_linters = {'python': ['pyre', 'mypy', 'flake8', 'pylint']}
 " Fix Python files with autopep8, could add yapf, black
 let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'autopep8']}
 " Disable warnings about trailing whitespace for Python files.
 let b:ale_warn_about_trailing_whitespace=0
+let g:ale_python_autopep8_options='--ignore=E402'
+" bad continuation is falsely flagged
+let g:ale_python_pylint_options='--disable=bad-continuation'
 let g:ale_python_mypy_options='--strict --ignore-missing-imports'
+" flake8 flags W503 (line break before binary operator) which is actually not pep8
+" E203 is for ':' position convention in slices (wrong in flake8) 
+let g:ale_python_flake8_options='--ignore=W503,E203'
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save=1
+" check :ALEInfo for more
 
 
 " configuration for nerdtree
