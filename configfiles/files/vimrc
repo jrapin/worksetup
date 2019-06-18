@@ -146,12 +146,17 @@ let g:ale_python_autopep8_options='--ignore=E402'
 " bad continuation is falsely flagged
 let g:ale_python_pylint_options='--disable=bad-continuation'
 let g:ale_python_mypy_options='--strict --ignore-missing-imports'
-" flake8 flags W503 (line break before binary operator) which is actually not pep8
+" flake8 flags W503, W504 (line break before/after binary operator) which is actually not pep8
 " E203 is for ':' position convention in slices (wrong in flake8) 
-let g:ale_python_flake8_options='--ignore=W503,E203'
+let g:ale_python_flake8_options='--ignore=W503,W504,E203'
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save=1
 " check :ALEInfo for more
+" the following lines could be useful
+" let b:ale_python_mypy_executable = 'full path' to make it load faster
+" let b:ale_python_mypy_use_global = 1  " probably to use the config in the files 
+let g:ale_lint_delay = 1000
+let g:ale_lint_on_text_changed = 'normal'
 
 
 " configuration for nerdtree
