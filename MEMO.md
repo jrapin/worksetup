@@ -15,7 +15,7 @@ The following provides standard application such as:
 ```
 sudo apt-get update && sudo apt-get install -y \
   build-essential \
-  vim-gnome \
+  vim \
   git \
   screen \
   byobu \
@@ -23,6 +23,7 @@ sudo apt-get update && sudo apt-get install -y \
   python3 \
   python3-dev \
   python3-pip \
+  python3-venv
 ```
 
 ## Byobu
@@ -60,25 +61,6 @@ Git-up aims at updating distant branches easily. It can be installed through:
 ```
 sudo apt-get install -y ruby-dev
 sudo gem install git-up
-```
-
-
-## Python virtualenv
-
-Virtualenv allows to have several Python package environments on a computer. Virtualenv, and a convenient wrapper called virtualenvwrapper, can be installed with:
-```
-sudo pip install virtualenv virtualenvwrapper
-```
-
-Then configure the folder where the environments will be stored by adding these lines in your bashrc/zshrc:
-```
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-```
-
-Virtualenvs are easily created with an instruction as follows (for a Python3 environment):
-```
-mkvirtualenv --python=/usr/bin/python3 <name>
 ```
 
 
