@@ -52,3 +52,10 @@ compdef __tmux-sessions ipyvim
 
 # Cool IP alias
 alias ip="wget -O- -q https://wtfismyip.com/text"
+
+# Notes
+notes() {
+    vim + ~/Notes/"$1"
+}
+alias n=notes
+compdef '_files -W ~/Documents/Notes' notes
