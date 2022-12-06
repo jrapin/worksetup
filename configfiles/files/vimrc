@@ -149,7 +149,6 @@ let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'auto
 let b:ale_warn_about_trailing_whitespace=0
 let g:ale_python_autopep8_options='--ignore=E402'
 " bad continuation is falsely flagged
-let g:ale_python_pylint_options='--disable=bad-continuation'
 let g:ale_python_mypy_options='--strict --ignore-missing-imports'
 " flake8 flags W503, W504 (line break before/after binary operator) which is actually not pep8
 " E203 is for ':' position convention in slices (wrong in flake8) 
