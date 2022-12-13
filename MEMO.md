@@ -55,8 +55,6 @@ Changing the default editor to vim can be done with:
 git config --global core.editor vim
 ```
 
-### Git-up
-
 As a shortcut for updating all branches, one can configure the `git up` command:
 ```
 git config --global alias.up 'pull --rebase --autostash'
