@@ -64,3 +64,14 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 # Preserve MANPATH if you already defined it somewhere in your config.
 # # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 # export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+
+# #  Note editing
+export PATH="/usr/local/sbin:$PATH"
+alias gco='git checkout'
+alias an='vim + -p ~/Dropbox\ \(Meta\)/Notes/*'
+notes() {
+    vim + ~/Dropbox\ \(Facebook\)/Notes/"$1"
+}
+alias n=notes
+compdef '_files -W ~/Documents/Notes' notes
