@@ -69,9 +69,9 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 # #  Note editing
 export PATH="/usr/local/sbin:$PATH"
 alias gco='git checkout'
-alias an='vim + -p ~/Dropbox\ \(Meta\)/Notes/*'
+alias an='vim + -p ~/Notes/*'
 notes() {
-    vim + ~/Dropbox\ \(Facebook\)/Notes/"$1"
+    vim + ~/Notes/"$1"
 }
 alias n=notes
-compdef '_files -W ~/Documents/Notes' notes
+compdef '_files -W ~/Notes' notes

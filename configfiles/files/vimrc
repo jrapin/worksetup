@@ -23,6 +23,7 @@ Bundle 'w0rp/ale'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'jpalardy/vim-slime'
 Bundle 'altercation/vim-colors-solarized'
+" Bundle 'lifepillar/vim-solarized8'  " for mac?
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'tpope/vim-surround'
@@ -152,7 +153,8 @@ let g:ale_python_autopep8_options='--ignore=E402'
 let g:ale_python_mypy_options='--strict --ignore-missing-imports'
 " flake8 flags W503, W504 (line break before/after binary operator) which is actually not pep8
 " E203 is for ':' position convention in slices (wrong in flake8) 
-let g:ale_python_flake8_options='--ignore=W503,W504,E203'
+" E501 line too long
+let g:ale_python_flake8_options='--ignore=W503,W504,E203,E501' " --max-line-length=140'
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save=1
 " check :ALEInfo for more
@@ -228,13 +230,28 @@ map <F10> :IPyRestart<CR>
 
 
 " solarize (color pattern)
+" set background=dark
+" colorscheme solarized8_high
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+"  works well in Ubuntu / with mac 
+"  and pastel color pattern + 49R 0G 50B for background
 let g:solarized_termtrans = 1
-colorscheme solarized 
+colorscheme solarized
 syntax enable
 set background=dark
 hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
 hi PmenuSel ctermfg=DarkGrey guifg=#2b506e guibg=#000000
 hi TabLineSel ctermfg=Red ctermbg=DarkGrey
+
+" let g:solarized_termtrans = 1
+" colorscheme solarized 
+" syntax enable
+" set background=dark
+" hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
+" hi PmenuSel ctermfg=DarkGrey guifg=#2b506e guibg=#000000
+" hi TabLineSel ctermfg=Red ctermbg=DarkGrey
 
 "Pmenu – normal item
 "PmenuSel – selected item
