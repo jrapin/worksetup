@@ -55,12 +55,9 @@ Changing the default editor to vim can be done with:
 git config --global core.editor vim
 ```
 
-### Git-up
-
-Git-up aims at updating distant branches easily. It can be installed through:
+As a shortcut for updating all branches, one can configure the `git up` command:
 ```
-sudo apt-get install -y ruby-dev
-sudo gem install git-up
+git config --global alias.up 'pull --rebase --autostash'
 ```
 
 

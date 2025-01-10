@@ -4,10 +4,10 @@ alias protege='screen -d -m -S protege bash -c /home/jeremy/Applications/Protege
 # Autojump
 #. /usr/share/autojump/autojump.sh
 
-# Solve window naming issue with zsh and byobu
+# Solve window naming issue with zsh and tmux/byobu
 export DISABLE_AUTO_TITLE="true"
 
-# create a byobu session with ipython on the right, and keeping the virtualenv or specifying it
+# create a tmux session with ipython on the right, and keeping the virtualenv or specifying it
 function ipyvim {
   # $1 session name
   # $2 virtualenv name (default to current virtualenv)
@@ -50,8 +50,9 @@ function __tmux-sessions() {
 
 compdef __tmux-sessions ipyvim
 
-# Cool IP alias
+# aliases
 alias ip="wget -O- -q https://wtfismyip.com/text"
+alias gco='git checkout'
 
 
 # NPM
@@ -65,13 +66,13 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 # # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 # export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
-
-# #  Note editing
 export PATH="/usr/local/sbin:$PATH"
-alias gco='git checkout'
+
+# Notes
 alias an='vim + -p ~/Notes/*'
 notes() {
     vim + ~/Notes/"$1"
 }
 alias n=notes
 compdef '_files -W ~/Notes' notes
+
