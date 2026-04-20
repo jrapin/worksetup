@@ -57,7 +57,7 @@ git config --global core.editor vim
 
 As a shortcut for updating all branches, one can configure the `git up` command:
 ```
-git config --global alias.up 'pull --rebase --autostash'
+git config --global alias.up '!git fetch --all --prune && git pull --rebase --autostash'
 ```
 
 
