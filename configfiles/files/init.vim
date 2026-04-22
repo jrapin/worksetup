@@ -3,36 +3,33 @@ filetype off                  " required
 
 
 " You should install the following packages for everything to work:
-" pip install autopep8 pylint flake8 mypy
+" pip install autopep8 pylint flake8 mypy pynvim
 
-" for installing vundle:
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" for installing vim-plug
+" sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+"        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Bundle 'honza/vim-snippets'
-Bundle 'w0rp/ale'
+call plug#begin('~/.vim/plugged')
+Plug 'gmarik/Vundle.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'honza/vim-snippets'
+Plug 'w0rp/ale'
 " Bundle 'python/black'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'jpalardy/vim-slime'
-Bundle 'altercation/vim-colors-solarized'
-" Bundle 'lifepillar/vim-solarized8'  " for mac?
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'terryma/vim-smooth-scroll'
-Bundle 'tpope/vim-surround'
-Bundle 'easymotion/vim-easymotion'
-Bundle 'tpope/vim-fugitive'
-Plugin 'rbong/vim-vertical'
-Plugin 'AndrewRadev/linediff.vim'
-Plugin 'Vimjas/vim-python-pep8-indent'
-" Make sure to call :PluginInstall in vim after changing the list
+Plug 'davidhalter/jedi-vim'
+Plug 'jpalardy/vim-slime'
+Plug 'altercation/vim-colors-solarized'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-vertical'
+Plug 'AndrewRadev/linediff.vim'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+call plug#end()
+" Make sure to call :PlugInstall and :UpdateRemotePlugins in nvim after changing the list
 
 " YCM or Jedi-vim are similar, one is probably sufficient
 " For YouCompleteMe, you must install afterwards:
@@ -52,7 +49,7 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 
 " All of your Plugins must be added before the following line
 
-call vundle#end()            " required
+" call vundle#end()            " required
 filetype plugin indent on    " requiredenable syntax highlighting
 
 
@@ -150,11 +147,11 @@ let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'auto
 let b:ale_warn_about_trailing_whitespace=0
 let g:ale_python_autopep8_options='--ignore=E402'
 " bad continuation is falsely flagged
+let g:ale_python_pylint_options='--disable=bad-continuation'
 let g:ale_python_mypy_options='--strict --ignore-missing-imports'
 " flake8 flags W503, W504 (line break before/after binary operator) which is actually not pep8
 " E203 is for ':' position convention in slices (wrong in flake8) 
-" E501 line too long
-let g:ale_python_flake8_options='--ignore=W503,W504,E203,E501' " --max-line-length=140'
+let g:ale_python_flake8_options='--ignore=W503,W504,E203'
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save=1
 " check :ALEInfo for more
@@ -230,28 +227,13 @@ map <F10> :IPyRestart<CR>
 
 
 " solarize (color pattern)
-" set background=dark
-" colorscheme solarized8_high
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-"  works well in Ubuntu / with mac 
-"  and pastel color pattern + 49R 0G 50B for background
 let g:solarized_termtrans = 1
-colorscheme solarized
+colorscheme solarized 
 syntax enable
 set background=dark
 hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
 hi PmenuSel ctermfg=DarkGrey guifg=#2b506e guibg=#000000
 hi TabLineSel ctermfg=Red ctermbg=DarkGrey
-
-" let g:solarized_termtrans = 1
-" colorscheme solarized 
-" syntax enable
-" set background=dark
-" hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
-" hi PmenuSel ctermfg=DarkGrey guifg=#2b506e guibg=#000000
-" hi TabLineSel ctermfg=Red ctermbg=DarkGrey
 
 "Pmenu – normal item
 "PmenuSel – selected item

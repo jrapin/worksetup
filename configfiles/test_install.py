@@ -25,7 +25,7 @@ def test_install_with_file():
         install.symlink_to_home(backup_dir, home_dir=home_dir)
         # check new files exist
         names = {x.name for x in home_dir.iterdir()}
-        assert not names ^ {'.flake8', '.myconfig', '.pylintrc', '.vimrc'}
+        assert not names ^ {'.config', '.flake8', '.myconfig', '.pylintrc', '.vimrc'}
         backed_up = {x.name for x in backup_dir.iterdir()}
         assert not backed_up ^ {'vimrc'}
 

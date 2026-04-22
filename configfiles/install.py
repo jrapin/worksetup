@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
 import shutil
+import typing as tp
 from pathlib import Path
 
 
-def symlink_to_home(backup_dir, home_dir=None):
+def symlink_to_home(backup_dir: Path, home_dir: tp.Optional[Path] = None) -> None:
     """Creates symlinks of the configuration files in the
     files directory to the home directory.
 
@@ -23,12 +23,16 @@ def symlink_to_home(backup_dir, home_dir=None):
     Current configuration files are flake8, pylintrc, vimrc and a "myconfig"
     file which should be sourced in the bashrc or zshrc.
     """
-    home_dir =  Path.home() if home_dir is None else Path(home_dir)
+    home_dir = Path.home() if home_dir is None else Path(home_dir)
     files_dir = Path(__file__).absolute().parent / "files"
     backup_dir = Path(backup_dir).absolute()
     for subdir in files_dir.iterdir():
         new_file = files_dir / subdir.name
-        home_file = home_dir / ("." + subdir.name)
+        if subdir.name != "init.vim":
+            home_file = home_dir / ("." + subdir.name)
+        else:
+            home_file = home_dir / ".config" / "neovim" / subdir.name
+            home_file.parent.mkdir(exist_ok=True, parents=True)
         # create backup if already exists as real file
         if home_file.is_file() and not home_file.is_symlink():
             backup_dir.mkdir(exist_ok=True)
@@ -43,6 +47,5 @@ def symlink_to_home(backup_dir, home_dir=None):
 
 
 if __name__ == "__main__":
-    backup_dir = Path(__file__).parent / "backup"
-    symlink_to_home(backup_dir)
-
+    backup_dir_ = Path(__file__).parent / "backup"
+    symlink_to_home(backup_dir_)
